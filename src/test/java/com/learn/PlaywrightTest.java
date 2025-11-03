@@ -106,23 +106,20 @@ public class PlaywrightTest {
             page.locator("[name='zipcode']").fill("101303");
             page.locator("[name='mobile_number']" ).fill("+19999999999");
 
-            //Click create acoount button
+            //Click create account button and verify creation
             page.locator("button:has-text('Create Account')").click();
-
-
-
             assertTrue(page.locator("text=ACCOUNT CREATED!").isVisible());
-
-
             page.locator("[data-qa='continue-button']").click();
-            //page.waitForTimeout(3000000);
-            //should check for logged in as Romeo here
-            page.locator("div.shop-menu.pull-right >> text=Delete Account").click();
-            //page.locator("a[href='/delete_account']").click();
 
+            //page.waitForTimeout(3000000);
+            //Check for logged in user, delete account and verify
+            assertTrue(page.locator("div.shop-menu.pull-right >> text=Logged in as Romeo").isVisible());
+            page.locator("div.shop-menu.pull-right >> text=Delete Account").click();
+            //page.locator("a[href='/delete_account']").click(); Alternative locator?
             assertTrue(page.locator("text=ACCOUNT DELETED!").isVisible());
             page.locator("[data-qa='continue-button']").click();
 
+            //Verify that there is no account logged in
             assertTrue(page.locator("div.shop-menu.pull-right >> text=Signup / Login").isVisible());
 
 
