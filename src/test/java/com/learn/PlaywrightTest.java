@@ -112,15 +112,18 @@ public class PlaywrightTest {
 
 
             assertTrue(page.locator("text=ACCOUNT CREATED!").isVisible());
+
+
+            page.locator("[data-qa='continue-button']").click();
             //page.waitForTimeout(3000000);
+            //should check for logged in as Romeo here
+            page.locator("div.shop-menu.pull-right >> text=Delete Account").click();
+            //page.locator("a[href='/delete_account']").click();
 
-            page.locator("button:has-text('Continue')").click();
-            page.locator("button:has-text('Delete Account')"); //should check for logged in as here
+            assertTrue(page.locator("text=ACCOUNT DELETED!").isVisible());
+            page.locator("[data-qa='continue-button']").click();
 
-            assertTrue(page.locator("ACCOUNT DELETED!").isVisible());
-            page.locator("data-qa='continue-button'").click();
-
-            assertTrue(page.locator("button:has-text('Signup / Login')").isVisible());
+            assertTrue(page.locator("div.shop-menu.pull-right >> text=Signup / Login").isVisible());
 
 
 
