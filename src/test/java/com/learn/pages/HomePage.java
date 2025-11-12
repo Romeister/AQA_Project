@@ -3,6 +3,8 @@ package com.learn.pages;
 import com.learn.base.BasePage;
 import com.microsoft.playwright.Page;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class HomePage extends BasePage {
     private final String url = "https://automationexercise.com";
 
@@ -28,5 +30,11 @@ public class HomePage extends BasePage {
         {
             page.locator("text= Signup / Login").click();
             return new LoginSignupPage(page);
+        }
+
+        public boolean assertHomepageTitle()
+        {
+             return page.title().toLowerCase().contains("automation");
+
         }
 }
