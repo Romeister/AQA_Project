@@ -110,7 +110,7 @@ public class LoginTests extends BaseTest {
         login.submitLogin();
 
         //Verify incorrect credentials message
-        assertTrue(page.locator("div.login-form >> text=Your email or password is incorrect!").isVisible(),
+        assertTrue(login.isLoginErrorVisisble(),
                 "Form should display 'Your email or password is incorrect!' message upon entering incorrect email and password.");
 
 

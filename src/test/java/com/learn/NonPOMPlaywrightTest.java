@@ -3,11 +3,10 @@ package com.learn;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlaywrightTest {
+public class NonPOMPlaywrightTest {
 
     @Test
     void openHomeAndCheckTitle() {

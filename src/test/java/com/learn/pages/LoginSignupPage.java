@@ -8,6 +8,7 @@ public class LoginSignupPage extends BasePage {
     //Text locators
     private final Locator newUserTitle = page.locator("text=New User Signup!");
     private final Locator loginUserTitle = page.locator("text=Login to your account");
+    private final Locator loginError = page.locator("div.login-form >> text=Your email or password is incorrect!");
 
     //Signup locators
     private final Locator signupNameInput = page.locator("[data-qa='signup-name']");
@@ -31,6 +32,11 @@ public class LoginSignupPage extends BasePage {
     public boolean isLoginToYourAccountVisible()
     {
         return loginUserTitle.isVisible();
+    }
+
+    public boolean isLoginErrorVisisble()
+    {
+        return loginError.isVisible();
     }
 
     public EnterAccountInfoPage startSignup (String name, String email)
