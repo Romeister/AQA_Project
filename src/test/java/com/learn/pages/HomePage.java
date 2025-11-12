@@ -5,6 +5,10 @@ import com.microsoft.playwright.Page;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
+//Should probably add check login status here since it's used in 2 tests already.
+//Should create separate delete account test/method to easily delete account. Implementation to be decided.
+
 public class HomePage extends BasePage {
     private final String url = "https://automationexercise.com";
 
@@ -32,9 +36,9 @@ public class HomePage extends BasePage {
             return new LoginSignupPage(page);
         }
 
-        public boolean assertHomepageTitle()
+        public boolean isAtHomePage()
         {
-             return page.title().toLowerCase().contains("automation");
+             return page.url().equalsIgnoreCase("https://automationexercise.com/");
 
         }
 }
