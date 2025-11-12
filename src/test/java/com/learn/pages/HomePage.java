@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Should probably add check login status here since it's used in 2 tests already.
 //Should create separate delete account test/method to easily delete account. Implementation to be decided.
+//Should change credential handling to be secure.
 
 public class HomePage extends BasePage {
     private final String url = "https://automationexercise.com";

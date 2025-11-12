@@ -9,11 +9,52 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class RegisterUserTest extends BaseTest {
+public class RegisterTests extends BaseTest {
 
     @Test
-    @Tag("registerUser_happypath_withDelete")
-    void registerUser_happyath_withDelete()
+    @Tag("registerUser_happypath")
+    void registerUser_happyath()
+    {
+        String name = "Romeo";
+        String email = "romeo@yahoo.com";
+        String password = "romeo123";
+
+        //Homepage handling
+        HomePage home = new HomePage(page)
+                .open()
+                .handleConsent();
+
+        assertTrue(home.isAtHomePage(), "User should be on the homepage");
+
+        //Signup / Login handling
+        LoginSignupPage auth = home.goToSignupLogin();
+        assertTrue(auth.isNewUserSignupVisible(), "'New User Signup' should be visible");
+        EnterAccountInfoPage form = auth.startSignup(name, email);
+        auth.submitSignup();
+
+        //Enter account info
+        assertTrue(form.isHeaderVisible(), "'ENTER ACCOUNT INFORMATION' should be visible");
+        form.fillAccountInformation(name , password , "1" , "1", "2000")
+                .fillAddressInformation(
+                        "Romeo", "Ast", "QASoft",
+                        "New York City,101303", "Chicago,123554",
+                        "United States", "New York", "New York City",
+                        "101303", "+19999999999"
+                );
+        form.submitCreateAccount();
+
+        //Verify account created
+        assertTrue(page.locator("text=ACCOUNT CREATED!").isVisible(),
+                "'ACCOUNT CREATED' text should be visible");
+        page.locator("[data-qa='continue-button']").click();
+        assertTrue(page.locator("div.shop-menu.pull-right >> text=Logged in as " + name).isVisible(),
+                "'Logged in as' " + name + " should be visible");
+
+    }
+
+    @Test
+    @Tag("registerUserHappypath_withDelete")
+    void registerUserHappypath_withDelete()
     {
         String name = "Romeo";
         String email = "romeo@yahoo.com";
@@ -61,44 +102,5 @@ public class RegisterUserTest extends BaseTest {
                 "'Signup / Login' should be visible again");
     }
 
-    @Test
-    @Tag("registerUser_happypath")
-    void registerUser_happyath()
-    {
-        String name = "Romeo";
-        String email = "romeo@yahoo.com";
-        String password = "romeo123";
 
-        //Homepage handling
-        HomePage home = new HomePage(page)
-                .open()
-                .handleConsent();
-
-        assertTrue(home.isAtHomePage(), "User should be on the homepage");
-
-        //Signup / Login handling
-        LoginSignupPage auth = home.goToSignupLogin();
-        assertTrue(auth.isNewUserSignupVisible(), "'New User Signup' should be visible");
-        EnterAccountInfoPage form = auth.startSignup(name, email);
-        auth.submitSignup();
-
-        //Enter account info
-        assertTrue(form.isHeaderVisible(), "'ENTER ACCOUNT INFORMATION' should be visible");
-        form.fillAccountInformation(name , password , "1" , "1", "2000")
-                .fillAddressInformation(
-                        "Romeo", "Ast", "QASoft",
-                        "New York City,101303", "Chicago,123554",
-                        "United States", "New York", "New York City",
-                        "101303", "+19999999999"
-                );
-        form.submitCreateAccount();
-
-        //Verify account created
-        assertTrue(page.locator("text=ACCOUNT CREATED!").isVisible(),
-                "'ACCOUNT CREATED' text should be visible");
-        page.locator("[data-qa='continue-button']").click();
-        assertTrue(page.locator("div.shop-menu.pull-right >> text=Logged in as " + name).isVisible(),
-                "'Logged in as' " + name + " should be visible");
-
-    }
 }

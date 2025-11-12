@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginUserTest extends BaseTest {
+public class LoginTests extends BaseTest {
 
     @Test
-    @Tag("loginUser_happypath_withDelete")
-    void loginUser_happypath_withDelete()
+    @Tag("loginUserPositiveTest_withDelete")
+    void loginUserPositiveTest_withDelete()
     {
         //SHOULD CHANGE TO SECURE CREDENTIALS!!! , simple non-secure credentials for now.
        String email = "romeo@yahoo.com";
@@ -50,8 +50,8 @@ public class LoginUserTest extends BaseTest {
 
 
     @Test
-    @Tag("loginUser_happypath_withLogout")
-    void loginUser_happypath_withLogout()
+    @Tag("loginUserPositiveTest_withLogout")
+    void loginUserPositiveTest_withLogout()
     {
         //SHOULD CHANGE TO SECURE CREDENTIALS!!! , simple non-secure credentials for now.
         String email = "romeo@yahoo.com";
@@ -83,5 +83,36 @@ public class LoginUserTest extends BaseTest {
         //Verify if logged out (if page is back to Signup / Login)
         assertTrue(page.locator("div.shop-menu.pull-right >> text=Signup / Login").isVisible(),
                 "'Signup / Login' should be visible again");
+    }
+
+    @Test
+    @Tag("loginUserNegativeTest_incorrectEmailAndPassword")
+    void loginUserNegativeTest_incorrectEmailAndPassword()
+    {
+        //SHOULD CHANGE TO SECURE CREDENTIALS!!! , simple non-secure credentials for now.
+        String email = "romeo1@yahoo.com";
+        String password = "romeo1234";
+
+        //Handle HomePage
+        HomePage home = new HomePage(page)
+                .open()
+                .handleConsent();
+
+
+        assertTrue(home.isAtHomePage() , "User should be on Homepage");
+        LoginSignupPage login = home.goToSignupLogin();
+
+        //Handle Login
+        assertTrue(login.isLoginToYourAccountVisible() ,
+                "'Login to your account' text should be visible");
+
+        login.startLogin(email , password);
+        login.submitLogin();
+
+        //Verify incorrect credentials message
+        assertTrue(page.locator("div.login-form >> text=Your email or password is incorrect!").isVisible(),
+                "Form should display 'Your email or password is incorrect!' message upon entering incorrect email and password.");
+
+
     }
 }
