@@ -1,6 +1,7 @@
 package com.learn.pages;
 
 import com.learn.base.BasePage;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,7 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //Should change credential handling to be secure.
 
 public class HomePage extends BasePage {
+    //URL locators
     private final String url = "https://automationexercise.com";
+    //Button locators
+    private final Locator productsBtn = page.locator("div.shop-menu.pull-right >> text=Products");
 
 
     public HomePage(Page page) {
@@ -39,7 +43,13 @@ public class HomePage extends BasePage {
 
         public boolean isAtHomePage()
         {
-             return page.url().equalsIgnoreCase("https://automationexercise.com/");
+             return page.url().equalsIgnoreCase(url);
 
+        }
+
+        public ProductsPage clickProductsBtn()
+        {
+            productsBtn.click();
+            return new ProductsPage(page);
         }
 }
