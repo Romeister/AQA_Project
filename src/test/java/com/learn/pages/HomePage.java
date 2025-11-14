@@ -7,13 +7,13 @@ import com.microsoft.playwright.Page;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-//Should probably add check login status here since it's used in 2 tests already.
-//Should create separate delete account test/method to easily delete account. Implementation to be decided.
-//Should change credential handling to be secure.
+//TODO Should probably add check login status here since it's used in 2 tests already.
+//TODO Should create separate delete account test/method to easily delete account. Implementation to be decided.
+//TODO Should change credential handling to be secure.
 
 public class HomePage extends BasePage {
     //URL locators
-    private final String url = "https://automationexercise.com";
+    private final String url = "https://automationexercise.com/";
     //Button locators
     private final Locator productsBtn = page.locator("div.shop-menu.pull-right >> text=Products");
 
@@ -51,5 +51,12 @@ public class HomePage extends BasePage {
         {
             productsBtn.click();
             return new ProductsPage(page);
+        }
+
+        public void checkLogs()
+        {
+            System.out.println("Expected: " + url);
+            System.out.println("Actual:   " + page.url());
+
         }
 }

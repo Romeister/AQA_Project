@@ -53,7 +53,7 @@ public class LoginTests extends BaseTest {
     @Tag("loginUserPositiveTest_withLogout")
     void loginUserPositiveTest_withLogout()
     {
-        //SHOULD CHANGE TO SECURE CREDENTIALS!!! , simple non-secure credentials for now.
+        //TODO SHOULD CHANGE TO SECURE CREDENTIALS!!! , simple non-secure credentials for now.
         String email = "romeo@yahoo.com";
         String password = "romeo123";
         String name = "Romeo";

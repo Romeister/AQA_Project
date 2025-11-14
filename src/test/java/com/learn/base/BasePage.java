@@ -1,6 +1,7 @@
 package com.learn.base;
 
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.*;
 
 public abstract class BasePage {
 
